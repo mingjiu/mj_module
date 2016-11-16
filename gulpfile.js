@@ -1,35 +1,30 @@
-// 引入 gulp
 var gulp = require('gulp');
-
-// 引入组件
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
-// 检查脚本
 gulp.task('lint', function() {
-    gulp.src('./public/src/js/*.js')
+    gulp.src('./public/src/js/modules/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
 
-// 合并，压缩文件
-gulp.task('scripts', function() {
-    gulp.src('./public/src/js/*.js')
-        .pipe(concat('index.js'))
-        .pipe(gulp.dest('./public/dist'))
-        .pipe(rename('all.min.js'))
-        .pipe(uglify({preserveComments: 'all'}))
+gulp.task('commonScript', function() {
+    gulp.src('./public/src/js/mjmodule.js')
+        .pipe(uglify())
         .pipe(gulp.dest('./public/dist'));
 });
+gulp.task('moduleScript', function(){
+    gulp.src('./public/src/js/modules/*.js')
+        .pipe(concat('index.js'))
+        .pipe(gulp.dest('./public/dist/modules'))
+        .pipe(rename('index.min.js'))
+        .pipe(uglify({preserveComments: 'all'}))
+        .pipe(gulp.dest('./public/dist/modules'));
+});
 
-// 默认任务
 gulp.task('default', function(){
-    gulp.run('lint', 'scripts');
-
-    // 监听文件变化
-    gulp.watch('./public/src/js/*.js', function(){
-        gulp.run('lint', 'scripts');
-    });
+    gulp.watch('./public/src/js/modules/*.js', ['lint', 'moduleScript']);
+    gulp.watch('./public/src/js/mjmodule.js', ['commonScript']);
 });
