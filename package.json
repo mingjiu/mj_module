@@ -1,0 +1,27 @@
+{
+  "name": "mj-module",
+  "version": "1.0.0",
+  "description": "js 模块按需缓存，按版本更新，依赖管理。说白就是js模块管理的node服务",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mingjiu/mjModule.git"
+  },
+  "author": "mjhuang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mingjiu/mjModule/issues"
+  },
+  "homepage": "https://github.com/mingjiu/mjModule#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  }
+}
